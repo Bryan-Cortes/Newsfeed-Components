@@ -114,3 +114,64 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+const body = document.querySelector('body');
+
+  function articleMaker(dataObject){
+
+    // Instantiate all the elements
+    const article = document.createElement('div');
+    const articleTitle = document.createElement('h2');
+    const articleDate = document.createElement('p');
+    const firstParagraph = document.createElement('p');
+    const secondParagraph = document.createElement('p');
+    const thirdParagraph = document.createElement('p');
+    const articleSpanButton = document.createElement('span');
+
+    // The structure of our elements
+
+    article.appendChild(articleTitle);
+    article.appendChild(articleDate);
+    article.appendChild(firstParagraph);
+    article.appendChild(secondParagraph);
+    article.appendChild(thirdParagraph);
+    article.appendChild(articleSpanButton);
+
+
+    // Elements class
+
+    article.classList.add('article');
+    articleDate.classList.add('date');
+    articleSpanButton.classList.add('expandButton');
+    // articleSpanButton.style.justifyContent = 'end'
+
+    // Text Content 
+    
+    articleTitle.textContent = dataObject.title;
+    articleDate.textContent = dataObject.date;
+    firstParagraph.textContent = dataObject.firstParagraph;
+    secondParagraph.textContent = dataObject.secondParagraph;
+    thirdParagraph.textContent = dataObject.thirdParagraph;
+    articleSpanButton.textContent = '+'
+  
+    // Elements event listeners
+
+    articleSpanButton.addEventListener('click',(event)=>{
+      article.classList.toggle('article-open');
+
+    });
+
+    // return of the article
+    return article;
+  };
+
+  
+  // inserts info from the DATA object and loops thru it
+
+  const newArticles = data.map((articleData)=>{
+    return articleMaker(articleData);
+  });
+
+  newArticles.forEach((item) =>{
+    body.appendChild(item);
+  });
